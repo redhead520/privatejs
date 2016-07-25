@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<title>21点</title>
+	<meta charset="utf-8">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0">
+	<link rel="shortcut icon" href="./favicon.png"  type="image/x-icon">
+	<link rel="shortcut icon" href="./favicon.png"  type="image/vnd.microsoft.icon">
+	<link rel="icon" href="./favicon.png"  type="image/vnd.microsoft.icon">
+	<link rel="apple-touch-icon-precomposed" href="./favicon.png" >
+	<link rel="apple-touch-icon" href="./favicon.png">
+	<script type="text/javascript" ></script>
+	<style>
+		#sg-loadscrn{
+		position:fixed; top:0;left:0;width:100%; height:100%; background-color:#fff; z-index:9999;
+	}
+
+	#sg-spinner{
+		position: absolute; width: 150px; height: 50px; top:50%; left:50%; margin-top:-25px; margin-left:-75px;
+		background-image: url('assets/sg-loader.gif');
+	}
+
+	#sg-spinner.no-img{
+		background: #ffffff;
+	}
+
+	#sg-loadtext{
+		position:absolute;
+		font-family: sans-serif;
+		top:50%; left:50%;
+		width: 250px;
+		margin-left:-125px;
+		margin-top:-125px;
+		text-align:center;
+		line-height:150%;
+		font-size:16px;
+	}
+	</style>
+	<script type="text/javascript" src="./js/zepto1.1.6.min.js"></script>
+	<script type="text/javascript" src="./assets/softgames-1.1.js"></script>
+	<script type="text/javascript">
+		var interfaceData={
+			token:'',//http://myjiabao.com/shop/game/
+			updateAcountApi:'http://192.168.1.41/shop/game/',//  http://192.168.1.49:10024/shop/game/
+			twentyOneOdds:1.5, //21赔率
+			doubleMax:500,   //双倍 1000赌注封顶 赌注大于500就没有双倍.
+			betMax:1000,    // 1000赌注封顶
+			startBank:0,    //游戏bank缓存
+			rate:50,       //玩家赢的概率
+			tie_rate:2,    //平局的概率
+			result:0      //0:本局输  1:本局赢  2:本局平
+		};
+		var params=location.search;
+		if(params!=''){
+			if(params.indexOf('token=')) {
+				interfaceData.token='JWT '+params.split('token=')[1];
+			}
+		}
+		window.gameLangs = ['en', 'es', 'tr'];
+		window.gameJS = ['js/viewporter.js','js/TweenMax.min.js','js/howler.js','js/app.min.js'];
+		//window.gameOnLoadScript = "();";
+	</script>
+	<!--Analytics-->
+	<style>
+		body {
+			margin: 0px;
+			padding: 0px;
+			width: 100%;
+			background-color:black;
+		}
+
+		canvas {
+			image-rendering: optimizeSpeed;
+			/*image-rendering: -moz-crisp-edges;*/
+			image-rendering: -webkit-optimize-contrast;
+			image-rendering: -o-crisp-edges;
+			image-rendering: optimize-contrast;
+			-ms-interpolation-mode: nearest-neighbor;
+			-webkit-tap-highlight-color: rgba(0,0,0,0);
+			-moz-tap-highlight-color: rgba(0,0,0,0);
+			tap-highlight-color: rgba(0,0,0,0);
+			user-select: none;
+			-webkit-touch-callout: none;
+			-webkit-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+		}
+	</style>
+</head>
+<body>
+		<div id="viewporter">
+				   <canvas id="canvas" moz-opaque></canvas>
+		</div>
+	</body>
+</html>
